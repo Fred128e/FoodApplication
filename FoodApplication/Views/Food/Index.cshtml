@@ -43,10 +43,10 @@
                 @Html.DisplayFor(modelItem => item.Amount)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Category.Id)
+                @Html.DisplayFor(modelItem => item.Category.CategoryType)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.MealType.Id)
+                @Html.DisplayFor(modelItem => item.MealType.MealType)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |

@@ -48,8 +48,8 @@ namespace FoodApplication.Controllers
         // GET: Food/Create
         public IActionResult Create()
         {
-            ViewData["CategoryId"] = new SelectList(_context.CategoryTypes, "Id", "Id");
-            ViewData["MealTypeId"] = new SelectList(_context.MealTypes, "Id", "Id");
+            ViewData["CategoryId"] = new SelectList(_context.CategoryTypes,"Id","CategoryType");
+            ViewData["MealTypeId"] = new SelectList(_context.MealTypes,"Id","MealType");
             return View();
         }
 
@@ -66,8 +66,8 @@ namespace FoodApplication.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CategoryId"] = new SelectList(_context.CategoryTypes, "Id", "Id", foodTable.CategoryId);
-            ViewData["MealTypeId"] = new SelectList(_context.MealTypes, "Id", "Id", foodTable.MealTypeId);
+            ViewData["CategoryId"] = new SelectList(_context.CategoryTypes,"Id","CategoryType");
+            ViewData["MealTypeId"] = new SelectList(_context.MealTypes,"Id","MealType");
             return View(foodTable);
         }
 
@@ -84,8 +84,8 @@ namespace FoodApplication.Controllers
             {
                 return NotFound();
             }
-            ViewData["CategoryId"] = new SelectList(_context.CategoryTypes, "Id", "Id", foodTable.CategoryId);
-            ViewData["MealTypeId"] = new SelectList(_context.MealTypes, "Id", "Id", foodTable.MealTypeId);
+            ViewData["CategoryId"] = new SelectList(_context.CategoryTypes, "Id","CategoryType", foodTable.Category);
+            ViewData["MealTypeId"] = new SelectList(_context.MealTypes, "Id","MealType", foodTable.MealType);
             return View(foodTable);
         }
 
@@ -121,8 +121,8 @@ namespace FoodApplication.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CategoryId"] = new SelectList(_context.CategoryTypes, "Id", "Id", foodTable.CategoryId);
-            ViewData["MealTypeId"] = new SelectList(_context.MealTypes, "Id", "Id", foodTable.MealTypeId);
+            ViewData["CategoryId"] = new SelectList(_context.CategoryTypes,"Id","CategoryType",foodTable.Category);
+            ViewData["MealTypeId"] = new SelectList(_context.MealTypes,"Id","MealType",foodTable.MealType);
             return View(foodTable);
         }
 
