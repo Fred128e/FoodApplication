@@ -18,6 +18,7 @@ namespace FoodApplication.ViewModels
         public double Amount { get; set; }
         public int? MealTypeId { get; set; }
         public int? CategoryId { get; set; }
+        public List<FoodTable> Food { get; set; }
 
         public CategoryTypes Category { get; set; }
         public MealTypes MealType { get; set; }

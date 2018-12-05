@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using FoodApplication.Models;
+using FoodApplication.ViewModels;
 
 namespace FoodApplication.Controllers
 {
@@ -80,14 +81,14 @@ namespace FoodApplication.Controllers
                 return NotFound();
             }
 
-            var foodTable = await _context.FoodTable.FindAsync(id);
-            if (foodTable == null)
+            var foodViewModel = await _context.FoodTable.FindAsync(id);
+            if (foodViewModel == null)
             {
                 return NotFound();
             }
-            ViewData["CategoryId"] = new SelectList(_context.CategoryTypes, "Id","CategoryType", foodTable.Category);
-            ViewData["MealTypeId"] = new SelectList(_context.MealTypes, "Id","MealType", foodTable.MealType);
-            return View(foodTable);
+            ViewData["CategoryId"] = new SelectList(_context.CategoryTypes, "Id","CategoryType",foodViewModel.Category);
+            ViewData["MealTypeId"] = new SelectList(_context.MealTypes, "Id","MealType",foodViewModel.MealType);
+            return View(foodViewModel);
         }
 
         // POST: Food/Edit/5
@@ -135,16 +136,16 @@ namespace FoodApplication.Controllers
                 return NotFound();
             }
 
-            var foodTable = await _context.FoodTable
+            var foodViewModel = await _context.FoodTable
                 .Include(f => f.Category)
                 .Include(f => f.MealType)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (foodTable == null)
+            if (foodViewModel == null)
             {
                 return NotFound();
             }
 
-            return View(foodTable);
+            return View(foodViewModel);
         }
 
         // POST: Food/Delete/5
@@ -152,8 +153,8 @@ namespace FoodApplication.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var foodTable = await _context.FoodTable.FindAsync(id);
-            _context.FoodTable.Remove(foodTable);
+            var foodViewModel = await _context.FoodTable.FindAsync(id);
+            _context.FoodTable.Remove(foodViewModel);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
