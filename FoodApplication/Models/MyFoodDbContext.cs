@@ -1,4 +1,5 @@
 ﻿using System;
+using FoodApplication.ViewModels;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
@@ -18,6 +19,7 @@ namespace FoodApplication.Models
         public virtual DbSet<CategoryTypes> CategoryTypes { get; set; }
         public virtual DbSet<FoodTable> FoodTable { get; set; }
         public virtual DbSet<MealTypes> MealTypes { get; set; }
+        //public virtual DbSet<FoodViewModel> FoodViewModel { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

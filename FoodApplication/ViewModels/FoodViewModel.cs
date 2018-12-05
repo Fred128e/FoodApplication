@@ -1,10 +1,13 @@
-﻿using System;
+﻿using FoodApplication.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace FoodApplication.Models
+namespace FoodApplication.ViewModels
 {
-    public partial class FoodTable
+    public class FoodViewModel
     {
         public int Id { get; set; }
         public string FoodName { get; set; }
@@ -17,6 +20,6 @@ namespace FoodApplication.Models
         public int? CategoryId { get; set; }
 
         public CategoryTypes Category { get; set; }
-        public MealTypes MealType { get; set; }  
+        public MealTypes MealType { get; set; }
     }
 }
