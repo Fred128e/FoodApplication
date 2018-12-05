@@ -50,7 +50,8 @@ namespace FoodApplication.Controllers
         {
             ViewData["CategoryId"] = new SelectList(_context.CategoryTypes,"Id","CategoryType");
             ViewData["MealTypeId"] = new SelectList(_context.MealTypes,"Id","MealType");
-            return View();
+            var currentDate = new FoodTable { DateOfConsumption = DateTime.UtcNow };
+            return View(currentDate);
         }
 
         // POST: Food/Create

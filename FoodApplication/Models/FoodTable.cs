@@ -18,5 +18,8 @@ namespace FoodApplication.Models
 
         public CategoryTypes Category { get; set; }
         public MealTypes MealType { get; set; }
+
+       
+            
     }
 }
