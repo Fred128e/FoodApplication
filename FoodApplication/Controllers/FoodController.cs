@@ -7,19 +7,19 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using FoodApplication.Models;
 using FoodApplication.ViewModels;
-using AutoMapper;
+using FoodApplication.Interfaces;
 
 namespace FoodApplication.Controllers
 {
     public class FoodController : Controller
     {
         private readonly MyFoodDbContext _context;
-        private readonly IMapper _mapper;
+        private readonly IFoodInterface _foodRepository;
 
-        public FoodController(MyFoodDbContext context, IMapper mapper)
+        public FoodController(MyFoodDbContext context,IFoodInterface foodInterface)
         {
             _context = context;
-            _mapper = mapper;
+            _foodRepository = foodInterface;
         }
 
         // GET: Food
