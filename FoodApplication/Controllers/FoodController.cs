@@ -7,16 +7,19 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using FoodApplication.Models;
 using FoodApplication.ViewModels;
+using AutoMapper;
 
 namespace FoodApplication.Controllers
 {
     public class FoodController : Controller
     {
         private readonly MyFoodDbContext _context;
+        private readonly IMapper _mapper;
 
-        public FoodController(MyFoodDbContext context)
+        public FoodController(MyFoodDbContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         // GET: Food
@@ -81,14 +84,14 @@ namespace FoodApplication.Controllers
                 return NotFound();
             }
 
-            var foodViewModel = await _context.FoodTable.FindAsync(id);
-            if (foodViewModel == null)
+            var foodTable = await _context.FoodTable.FindAsync(id);
+            if (foodTable == null)
             {
                 return NotFound();
             }
-            ViewData["CategoryId"] = new SelectList(_context.CategoryTypes, "Id","CategoryType",foodViewModel.Category);
-            ViewData["MealTypeId"] = new SelectList(_context.MealTypes, "Id","MealType",foodViewModel.MealType);
-            return View(foodViewModel);
+            ViewData["CategoryId"] = new SelectList(_context.CategoryTypes, "Id","CategoryType",foodTable.Category);
+            ViewData["MealTypeId"] = new SelectList(_context.MealTypes, "Id","MealType",foodTable.MealType);
+            return View(foodTable);
         }
 
         // POST: Food/Edit/5
@@ -136,16 +139,16 @@ namespace FoodApplication.Controllers
                 return NotFound();
             }
 
-            var foodViewModel = await _context.FoodTable
+            var foodTable = await _context.FoodTable
                 .Include(f => f.Category)
                 .Include(f => f.MealType)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (foodViewModel == null)
+            if (foodTable == null)
             {
                 return NotFound();
             }
 
-            return View(foodViewModel);
+            return View(foodTable);
         }
 
         // POST: Food/Delete/5
@@ -153,8 +156,8 @@ namespace FoodApplication.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var foodViewModel = await _context.FoodTable.FindAsync(id);
-            _context.FoodTable.Remove(foodViewModel);
+            var foodTable = await _context.FoodTable.FindAsync(id);
+            _context.FoodTable.Remove(foodTable);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }

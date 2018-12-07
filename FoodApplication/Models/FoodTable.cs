@@ -6,6 +6,17 @@ namespace FoodApplication.Models
 {
     public partial class FoodTable
     {
+        //public FoodTable(int id, string foodName, DateTime dateOfConsumption, double amount, int mealTypeId, int categoryId)
+        //{
+        //    Id = id;
+        //    FoodName = foodName;
+        //    DateOfConsumption = dateOfConsumption;
+        //    Amount = amount;
+        //    MealTypeId = mealTypeId;
+        //    CategoryId = categoryId;
+            
+        //}
+
         public int Id { get; set; }
         public string FoodName { get; set; }
 

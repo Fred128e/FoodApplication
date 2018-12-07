@@ -13,7 +13,6 @@ namespace FoodApplication.ViewModels
         public string FoodName { get; set; }
 
         [DataType(DataType.Date)]
-        //[DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}",ApplyFormatInEditMode = true)]
         public DateTime DateOfConsumption { get; set; }
         public double Amount { get; set; }
         public int? MealTypeId { get; set; }
